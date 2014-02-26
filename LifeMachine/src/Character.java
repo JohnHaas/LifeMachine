@@ -1,64 +1,156 @@
 import java.util.ArrayList;
 
-
+/*
+ * Character class holds all the information about a character.
+ * It includes a unique character ID, stats, inventory, relations, etc.
+ */
 public class Character {
 	private static final int NUM_STATS = 12;
-	private static int globalId;
+	private static final int NUM_PER = 2;
+	private static final int NUM_TRAIT = 0;
+	private static int globalId = 0;
+	private static ArrayList<Character> charList = new ArrayList<Character>();
 
-	private double[] stats;
 	private int age;
-	private boolean isActive = false;
+	private boolean isActive;
 	private double upkeep;
 	private double income;
 	private String name;
 	private int id;
+	
+	private double[] stats;
+	private double[] statMult;
+	private double[] personality;
+	private boolean[] traits;
 	private ArrayList<Item> inventory;
 
-	private RelationTree<Character> relations;
-
-	// 0 = Strength, 1 = Dexterity, 2 = Charisma, 3 = Intelligence, 4 = Luck, 5
-	// = Life, //6 = Independence, 7 = Sanity, 8 = Appeal, 9 = Stamina, 10 =
-	// Stress, 11 = Health
-
-	// character flags here (traits?)
-	boolean spouse; // ie if true you can have event where your wife dies
-	boolean evil; // if true more crime related events pop up
-
+	private RelationTreeNode relations;
+	
 	// Stats are out of 100 points max
 	// Constructors
 	Character() {
-		this(new double[NUM_STATS]);
-		for (int i = 0; i < NUM_STATS; i++) {
-			stats[i] = Math.random() * 100;
+		age = 0;
+		isActive = false;
+		upkeep = 0;
+		income = 0;
+		name = "";
+		id = globalId;
+		id++;
+		
+		stats = new double[NUM_STATS];
+		statMult = new double[NUM_STATS];
+		personality = new double[NUM_PER];
+		traits = new boolean[NUM_TRAIT];
+		inventory = new ArrayList<Item>();
+		
+		relations = new RelationTreeNode(this);
+		charList.add(this);
+	}
+	
+	//Modified by genetics
+	Character(Character mom, Character dad) {
+		this();
+		geneticMachine(mom, dad);
+		relations.addParent(mom.getId());
+		relations.addParent(dad.getId());
+		mom.relations.addChild(this.getId());
+		dad.relations.addChild(this.getId());
+		if(!mom.relations.getChildren().isEmpty()) {
+			for(int i = 0; i < mom.relations.getChildren().size(); i++) {
+				relations.addSibling(mom.relations.getChildVal(i));
+			}
 		}
 	}
 
 	Character(double[] s) {
-		age = 0;
+		this();
 		stats = s;
-		income = 0;
-		upkeep = 100;
-		name = "";
-		id = globalId;
-		globalId++;
 	}
 
 	Character(Character c) {
+		this();
 		age = c.age;
-		System.arraycopy(c.stats, 0, stats, 0, NUM_STATS);
-		income = c.income;
-		upkeep = c.upkeep;
 		name = c.name;
-		id = globalId;
-		globalId++;
+		upkeep = c.upkeep;
+		stats = c.stats;
+		statMult = c.statMult;
+		personality = c.personality;
+		traits = c.traits;
 	}
 
-	// STATS:
-	// 0 = Strength, 1 = Dexterity, 2 = Charisma, 3 = Intelligence, 4 = Luck, 5
-	// = Life, //6 = Independence, 7 = Sanity, 8 = Appeal, 9 = Stamina, 10 =
-	// Stress, 11 = Health
+	public void geneticMachine(Character m, Character d) {
+		stats = statRoll(m, d);
+		statMult = statMultRoll(m, d);
+		personality = perRoll(m, d);
+		traits = traitRoll(m, d);
+	}
+	
+	//Does stat random from average of parents, one of parents, and complete random.
+	public static double[] statRoll(Character m, Character d) {
+		int statMerge = (int)(Math.random() * (NUM_STATS/2));
+		int statPick = (int)(Math.random() * (NUM_STATS/2));
+		int statLeft = NUM_STATS - statMerge - statPick;
+		double[] newStats;
+		boolean[] isChanged = new boolean[NUM_STATS];
+		for(int i = 0; i < NUM_STATS; i++) {
+			isChanged[i] = false;
+		}
+		if((int)(Math.random() * 2) == 0) {
+			newStats = m.stats;
+		}
+		else {
+			newStats = d.stats;
+		}
+		//Complete Random
+		for(int i = 0; i < statLeft; i++) {
+			int temp = (int)(Math.random() * NUM_STATS);
+			if(!isChanged[temp]) {
+				newStats[temp] = (int)(Math.random() * 50) + 25;
+				isChanged[temp] = true;
+			}
+		}
+		//Average
+		for(int i = 0; i < statMerge; i++) {
+			
+		}
+		//Pick
+		for(int i = 0; i < statPick; i++) {
+			
+		}
+		return newStats;
+	}
+	
+	//Uses statRoll algorithm to random stat multiplier.
+	public static double[] statMultRoll(Character m, Character d) {
+		double[] newStatMult = new double[NUM_STATS];
+		return newStatMult;
+	}
+	
+	//Uses statRoll algorithm to random personality.
+	public static double[] perRoll(Character m, Character d) {
+		double[] newPer = new double[NUM_PER];
+		return newPer;
+	}
+	
+	public static boolean[] traitRoll(Character m, Character d) {
+		boolean[] newTraits = new boolean[NUM_TRAIT];
+		return newTraits;
+	}
+	
+	//Static getter
+	//Id parameter. Search through and get Character with id, i.
+	public static Character getChar(int i) {
+		return charList.get(i);
+	}
+	
+	/*
+	 * STATS:
+	 * 0 = Strength, 1 = Dexterity, 2 = Charisma, 3 = Intelligence, 4 = Luck, 
+	 * 5 = Life, 6 = Independence, 7 = Sanity, 8 = Appeal, 9 = Stamina, 
+	 * 10 = Stress, 11 = Health
+	 */
 
-	// Getters and Setters
+	// Stats Get Set
 	public double getStat(int i) {
 		return stats[i];
 	}
@@ -147,9 +239,6 @@ public class Character {
 		stats[9] = val;
 	}
 
-	// stress is a hidden variable, used for determining availability of suicide
-	// option
-
 	public void setStress(double val) {
 		stats[10] = val;
 	}
@@ -166,7 +255,13 @@ public class Character {
 		return stats[11];
 	}
 
-	// Stats get set
+	/*
+	 * PERSONALITY:
+	 * 0 = Temper, 1 = Criminality, 
+	 */
+	
+	
+	// Other Get Set
 
 	public int getAge() {
 		return age;
