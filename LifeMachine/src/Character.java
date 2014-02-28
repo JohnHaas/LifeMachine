@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Character {
 	public static final int NUM_STATS = 13;
-	public static final int NUM_PER = 7;
+	public static final int NUM_PER = 11;
 	public static final int NUM_SKILL = 0;
 	public static final int NUM_TRAIT = 0;
 	
@@ -82,6 +82,20 @@ public class Character {
 		statMult = c.statMult;
 		personality = c.personality;
 		traits = c.traits;
+	}
+	
+	//Item usage
+	public void addItem(int i) {
+		inventory.add(Item.getItem(i));
+	}
+	
+	public void removeItem(String name) {
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i).getName().equals(name)) {
+				inventory.remove(i);
+				break;
+			}
+		}
 	}
 
 	//Ages and changes decaytion
@@ -454,8 +468,8 @@ public class Character {
 
 	/*
 	 * PERSONALITY:
-	 * 0 = Temper, 1 = Criminality, 2 = Good/Evil, 3 = Laziness, 4 = Independence, 5 = Sanity, 6 = Courage,
-	 * 7 = Compassion, 8 = Curiosity, 9 = Loyalty, 10 = Honesty
+	 * 0 = Temper, 1 = Criminality, 2 = Good/Evil, 3 = Laziness, 4 = Independence, 5 = Sanity, 
+	 * 6 = Courage, 7 = Compassion, 8 = Curiosity, 9 = Loyalty, 10 = Honesty
 	 */
 	public double getPer(int i) {
 		return personality[i];
@@ -555,7 +569,8 @@ public class Character {
 	
 	/*
 	 * SKILLS:
-	 * 
+	 * 0 = Hunting, 1 = Gathering, 2 = Tool Craft, 3 = Slash, 4 = Blunt, 5 = Pierce,
+	 * 6 = Block
 	 */
 	public double getSkill(int i) {
 		return skills[i];

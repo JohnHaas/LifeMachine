@@ -13,6 +13,7 @@ public class Item {
 	private String name;
 	private String descrip;
 	private double[] stats;
+	private double[] statMult;
 	private double[] skillAff;
 	
 	Item() {
@@ -21,6 +22,7 @@ public class Item {
 		id = globalId;
 		id++;
 		stats = new double[Character.NUM_STATS];
+		statMult = new double[Character.NUM_STATS];
 		skillAff = new double[Character.NUM_SKILL];
 		itemList.add(this);
 	}
@@ -35,9 +37,16 @@ public class Item {
 		this.stats = stats;
 	}
 	
-	Item(double[] stats, double[] skillAff) {
+	Item(double[] stats, double[] statMult) {
 		this();
 		this.stats = stats;
+		this.statMult = statMult;
+	}
+	
+	Item(double[] stats, double[] statMult, double[] skillAff) {
+		this();
+		this.stats = stats;
+		this.statMult = statMult;
 		this.skillAff = skillAff;
 	}
 	
@@ -45,6 +54,9 @@ public class Item {
 	public void applyItem(Character c) {
 		for(int i = 0; i < Character.NUM_STATS; i++) {
 			c.setStats(i, c.getStats(i) + stats[i]);
+		}
+		for(int i = 0; i < Character.NUM_STATS; i++) {
+			c.setStatMult(i, c.getStats(i) + statMult[i]);
 		}
 		for(int i = 0; i < Character.NUM_SKILL; i++) {
 			c.setSkillAff(i, c.getSkillAff(i) + skillAff[i]);
@@ -54,6 +66,9 @@ public class Item {
 	public void removeItem(Character c) {
 		for(int i = 0; i < Character.NUM_STATS; i++) {
 			c.setStats(i, c.getStats(i) - stats[i]);
+		}
+		for(int i = 0; i < Character.NUM_STATS; i++) {
+			c.setStatMult(i, c.getStats(i) - statMult[i]);
 		}
 		for(int i = 0; i < Character.NUM_SKILL; i++) {
 			c.setSkillAff(i, c.getSkillAff(i) - skillAff[i]);
@@ -72,6 +87,14 @@ public class Item {
 	
 	public void setStats(double[] val) {
 		stats = val;
+	}
+	
+	public double[] getStatMult() {
+		return statMult;
+	}
+	
+	public void setStatMult(double[] val) {
+		statMult = val;
 	}
 	
 	public double[] getSkillAff() {
@@ -96,5 +119,9 @@ public class Item {
 	
 	public void setDescrip(String val) {
 		descrip = val;
+	}
+	
+	public int getId() {
+		return id;
 	}
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ItemList>
+    <Item>
+	    <Name>Club of Exampling</Name>
+	    <Descrip>Charisma +10. This club is the legendary example club. It makes others follow
+	        your example.</Descrip>
+	    <Stats>
+	        <s:0>0</s:0>
+	        <s:1>0</s:1>
+	        <s:2>10</s:2>
+	        <s:3>0</s:3>
+	        <s:4>0</s:4>
+	        <s:5>0</s:5>
+	        <s:6>0</s:6>
+	        <s:7>0</s:7>
+	        <s:8>0</s:8>
+	        <s:9>0</s:9>
+	        <s:10>0</s:10>
+	        <s:11>0</s:11>
+	        <s:12>0</s:12>
+	    </Stats>
+	    <StatMult>
+	        <sm:0>0</sm:0>
+	        <sm:1>0</sm:1>
+	        <sm:2>0</sm:2>
+	        <sm:3>0</sm:3>
+	        <sm:4>0</sm:4>
+	        <sm:5>0</sm:5>
+	        <sm:6>0</sm:6>
+	        <sm:7>0</sm:7>
+	        <sm:8>0</sm:8>
+	        <sm:9>0</sm:9>
+	        <sm:10>0</sm:10>
+	        <sm:11>0</sm:11>
+	        <sm:12>0</sm:12>
+	    </StatMult>
+	    <SkillAff>
+	        <sa:0>0</sa:0>
+	        <sa:1>0</sa:1>
+	        <sa:2>0</sa:2>
+	        <sa:3>0</sa:3>
+	        <sa:4>0</sa:4>
+	        <sa:5>0</sa:5>
+	        <sa:6>0</sa:6>
+	        <sa:7>0</sa:7>
+	        <sa:8>0</sa:8>
+	        <sa:9>0</sa:9>
+	        <sa:10>0</sa:10>
+	        <sa:11>0</sa:11>
+	        <sa:12>0</sa:12>
+	    </SkillAff>
+	</Item>
+</ItemList>
