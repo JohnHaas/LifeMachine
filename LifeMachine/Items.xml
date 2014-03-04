@@ -150,6 +150,9 @@
 	    </SkillAff>
 		<Weight>2</Weight>
 	</Item>
+	<!--
+		Can be dropped upon finishing Break the Curse event.
+	-->
 	<Item>
 	    <Name>The Dread Machine</Name>
 	    <Descrip>Luck -50, All Stat Multipliers -.5, All Skill Affinity -.5. 
@@ -190,6 +193,9 @@
 		<Weight>10</Weight>
 		<Cursed>True</Cursed>
 	</Item>
+	<!--
+		Wizard Hats offer a boost in stats. Upon entering the medieval era, you may be persecuted and hunted if in inventory.
+	-->
 	<Item>
 		<Name>Wizard Hat(Minor)</Name>
 		<Descrip>Intelligence +5, Dexterity +2, Luck +1. A fancy wizard hat. Beware the repercussions though.... Weight: 1.</Descrip>
@@ -222,7 +228,7 @@
 	</Item>
 	<!--
 		THE HAT COLLECTION:
-		 When you have the entire collection, you can keep it on display in the household and the entire household gets a boost of +
+		 When you have the entire collection, you can keep it on display in the household and the entire household gets a boost of +5 to all stats.
 	-->
 	<Item>
 		<Name>Red Hat</Name>
@@ -251,6 +257,9 @@
 		<Weight>1</Weight>
 		<Collection>Hat</Collection>
 	</Item>
+	<!--
+		Add stats based on a fraction of the people near the character's stats.
+	-->
 	<Item>
 		<Name>Whore Hat</Name>
 		<Descrip>Appeal +5. ...Whore Hat. Weight: 1. Collection: Hat.</Descrip>
@@ -260,4 +269,58 @@
 		<Weight>1</Weight>
 		<Collection>Hat</Collection>
 	</Item>
-</ItemList>
+	<!--
+		THE CLOVER COLLECTION:
+		 When you have all the clovers in your household, you can turn them into a collection that grants +15 Luck to all household members.
+		 It can be activated(One time use) to summon a leprechaun that brings money, but decreases the household Luck gain to +10.
+	-->
+	<Item>
+		<Name>One Leaf Clover</Name>
+		<Descrip>Luck +1. A clover of one leaf. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>1</s4>
+		</Stats>
+	</Item>
+	<Item>
+		<Name>Two Leaf Clover</Name>
+		<Descrip>Luck +2. A clover of two leaves. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>2</s4>
+		</Stats>
+	</Item>
+	<Item>
+		<Name>Three Leaf Clover</Name>
+		<Descrip>Luck +3. A clover of three leaves. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>3</s4>
+		</Stats>
+	</Item>
+	<Item>
+		<Name>Four Leaf Clover</Name>
+		<Descrip>Luck +15. My oh my, what a lucky little clover. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>15</s4>
+		</Stats>
+	</Item>
+	<Item>
+		<Name>Five Leaf Clover</Name>
+		<Descrip>Luck +3. A clover of five leaves. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>3</s4>
+		</Stats>
+	</Item>
+	<Item>
+		<Name>Six Leaf Clover</Name>
+		<Descrip>Luck +2. A clover of six leaves. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>2</s4>
+		</Stats>
+	</Item>
+	<Item>
+		<Name>Seven Leaf Clover</Name>
+		<Descrip>Luck +1. A clover of seven leaves. Weight: .1. Collection: Clover.</Descrip>
+		<Stats>
+			<s4>1</s4>
+		</Stats>
+	</Item>
+	</ItemList>
