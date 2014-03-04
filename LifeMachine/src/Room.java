@@ -15,4 +15,13 @@ public class Room {
 	public void addCharacter(int i) {
 		charList.add(Character.getChar(i));
 	}
+	
+	public void removeCharacter(int id) {
+		for(int i = 0; i < charList.size(); i++) {
+			if(charList.get(i).getId() == id) {
+				charList.remove(charList.get(i));
+				break;
+			}
+		}
+	}
 }

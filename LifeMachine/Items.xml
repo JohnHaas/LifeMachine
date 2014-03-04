@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	STATS:
+	 0 = Strength, 1 = Dexterity, 2 = Charisma, 3 = Intelligence, 4 = Luck, 
+	 5 = Life, 6 = Appeal, 7 = Stamina, 8 = Stress, 9 = Health, 10 = Height,
+	 11 = Weight, 12 = Perception
+	 
+	 PERSONALITY:
+	 0 = Temper, 1 = Criminality, 2 = Good/Evil, 3 = Laziness, 4 = Independence, 5 = Sanity, 
+	 6 = Courage, 7 = Compassion, 8 = Curiosity, 9 = Loyalty, 10 = Honesty
+	 
+	 SKILLS:
+	 0 = Hunting, 1 = Gathering, 2 = Tool Craft, 3 = Slash, 4 = Blunt, 5 = Pierce,
+	 6 = Block, 7 = Throw, 8 = Arcane Magic
+	 
+	 TRAITS:
+	 
+-->
 <ItemList>
-    <Item>
-	    <Name>Club of Exampling</Name>
-	    <Descrip>Charisma +10. This club is the legendary example club. It makes others follow
-	        your example.</Descrip>
+	<Item>
+	    <Name>Blank Slate</Name>
+	    <Descrip>It does absolutely nothing. Weight: 0.</Descrip>
 	    <Stats>
 	        <s:0>0</s:0>
 	        <s:1>0</s:1>
-	        <s:2>10</s:2>
+	        <s:2>0</s:2>
 	        <s:3>0</s:3>
 	        <s:4>0</s:4>
 	        <s:5>0</s:5>
@@ -34,6 +50,34 @@
 	        <sm:11>0</sm:11>
 	        <sm:12>0</sm:12>
 	    </StatMult>
+		<Personality>
+	        <p:0>0</p:0>
+	        <p:1>0</p:1>
+	        <p:2>0</p:2>
+	        <p:3>0</p:3>
+	        <p:4>0</p:4>
+	        <p:5>0</p:5>
+	        <p:6>0</p:6>
+	        <p:7>0</p:7>
+	        <p:8>0</p:8>
+	        <p:9>0</p:9>
+	        <p:10>0</p:10>
+	    </Personality>
+		<Skills>
+	        <sk:0>0</sk:0>
+	        <sk:1>0</sk:1>
+	        <sk:2>0</ska:2>
+	        <sk:3>0</sk:3>
+	        <sk:4>0</sk:4>
+	        <sk:5>0</sk:5>
+	        <sk:6>0</sk:6>
+	        <sk:7>0</sk:7>
+	        <sk:8>0</sk:8>
+	        <sk:9>0</sk:9>
+	        <sk:10>0</sk:10>
+	        <sk:11>0</sk:11>
+	        <sk:12>0</sk:12>
+	    </Skills>
 	    <SkillAff>
 	        <sa:0>0</sa:0>
 	        <sa:1>0</sa:1>
@@ -49,5 +93,171 @@
 	        <sa:11>0</sa:11>
 	        <sa:12>0</sa:12>
 	    </SkillAff>
+		<Weight>0</Weight>
+	</Item>
+    <Item>
+	    <Name>Club of Exampling</Name>
+	    <Descrip>Strength +3, Charisma +10, Blunt Affinity +.1. This club is the legendary example club. It makes others follow
+	        your example. Weight: 4.5.</Descrip>
+	    <Stats>
+	        <s0>3</s0>
+	        <s2>10</s2>
+	    </Stats>
+	    <SkillAff>
+	        <sa4>.1</sa4>
+	    </SkillAff>
+		<Weight>4.5</Weight>
+	</Item>
+	<Item>
+	    <Name>Club</Name>
+	    <Descrip>Strength +3, Blunt Affinity +.1. Just your ordinary club. Weight: 5.</Descrip>
+	    <Stats>
+	        <s0>3</s0>
+	    </Stats>
+	    <SkillAff>
+	        <sa4>.1</sa4>
+	    </SkillAff>
+		<Weight>5</Weight>
+	</Item>
+	<Item>
+	    <Name>Bone Spear</Name>
+	    <Descrip>Strength +4, Pierce Affinity +.1. An ordinary bone spear. Weight: 4.</Descrip>
+	    <Stats>
+	        <s0>4</s0>
+	    </Stats>
+	    <SkillAff>
+	        <sa5>.1</sa5>
+	    </SkillAff>
+		<Weight>4</Weight>
+	</Item>
+	<Item>
+	    <Name>Meat</Name>
+	    <Descrip>Health +3, Weight +1. A juicy slab of raw meat. Weight: 1.</Descrip>
+	    <Stats>
+	        <s9>3</s9>
+	        <s11>1</s11>
+	    </Stats>
+		<Weight>1</Weight>
+	</Item>
+	<Item>
+	    <Name>Rock</Name>
+	    <Descrip>Strength +1, Throw Affinity +.1. A fancy throwing rock. Weight: 2.</Descrip>
+	    <Stats>
+	        <s0>1</s0>
+	    </Stats>
+	    <SkillAff>
+	        <sa7>.1</sa7>
+	    </SkillAff>
+		<Weight>2</Weight>
+	</Item>
+	<Item>
+	    <Name>The Dread Machine</Name>
+	    <Descrip>Luck -50, All Stat Multipliers -.5, All Skill Affinity -.5. 
+			Life is Cruel. Weight: 10. Cursed!</Descrip>
+	    <Stats>
+	        <s4>-50</s4>
+	    </Stats>
+	    <StatMult>
+	        <sm0>-.5</sm0>
+	        <sm1>-.5</sm1>
+	        <sm2>-.5</sm2>
+	        <sm3>-.5</sm3>
+	        <sm4>-.5</sm4>
+	        <sm5>-.5</sm5>
+	        <sm6>-.5</sm6>
+	        <sm7>-.5</sm7>
+	        <sm8>-.5</sm8>
+	        <sm9>-.5</sm9>
+	        <sm10>-.5</sm10>
+	        <sm11>-.5</sm11>
+	        <sm12>-.5</sm12>
+	    </StatMult>
+	    <SkillAff>
+	        <sa0>-.5</sa0>
+	        <sa1>-.5</sa1>
+	        <sa2>-.5</sa2>
+	        <sa3>-.5</sa3>
+	        <sa4>-.5</sa4>
+	        <sa5>-.5</sa5>
+	        <sa6>-.5</sa6>
+	        <sa7>-.5</sa7>
+	        <sa8>-.5</sa8>
+	        <sa9>-.5</sa9>
+	        <sa10>-.5</sa10>
+	        <sa11>-.5</sa11>
+	        <sa12>-.5</sa12>
+	    </SkillAff>
+		<Weight>10</Weight>
+		<Cursed>True</Cursed>
+	</Item>
+	<Item>
+		<Name>Wizard Hat(Minor)</Name>
+		<Descrip>Intelligence +5, Dexterity +2, Luck +1. A fancy wizard hat. Beware the repercussions though.... Weight: 1.</Descrip>
+		<Stats>
+			<s1>2</s1>
+			<s3>5</s3>
+			<s4>1</s4>
+		</Stats>
+		<Weight>1</Weight>
+	</Item>
+	<Item>
+		<Name>Wizard Hat(Moder)</Name>
+		<Descrip>Intelligence +10, Dexterity +4, Luck +2. A fancy wizard hat. Beware the repercussions though.... Weight: 1.</Descrip>
+		<Stats>
+			<s1>4</s1>
+			<s3>10</s3>
+			<s4>2</s4>
+		</Stats>
+		<Weight>1</Weight>
+	</Item>
+	<Item>
+		<Name>Wizard Hat(Major)</Name>
+		<Descrip>Intelligence +15, Dexterity +6, Luck +3. A fancy wizard hat. Beware the repercussions though.... Weight: 1.</Descrip>
+		<Stats>
+			<s1>6</s1>
+			<s3>15</s3>
+			<s4>3</s4>
+		</Stats>
+		<Weight>1</Weight>
+	</Item>
+	<!--
+		THE HAT COLLECTION:
+		 When you have the entire collection, you can keep it on display in the household and the entire household gets a boost of +
+	-->
+	<Item>
+		<Name>Red Hat</Name>
+		<Descrip>Strength +5. One hat, Two hat, Red Hat.... Weight: 1. Collection: Hat.</Descrip>
+		<Stats>
+			<s0>5</s0>
+		</Stats>
+		<Weight>1</Weight>
+		<Collection>Hat</Collection>
+	</Item>
+	<Item>
+		<Name>Blue Hat</Name>
+		<Descrip>Intelligence +5. ...Blue Hat. Weight: 1. Collection: Hat.</Descrip>
+		<Stats>
+			<s3>5</s3>
+		</Stats>
+		<Weight>1</Weight>
+		<Collection>Hat</Collection>
+	</Item>
+	<Item>
+		<Name>Green Hat</Name>
+		<Descrip>Luck +5. Three hat, Four hat, Green Hat.... Weight: 1. Collection: Hat.</Descrip>
+		<Stats>
+			<s4>5</s4>
+		</Stats>
+		<Weight>1</Weight>
+		<Collection>Hat</Collection>
+	</Item>
+	<Item>
+		<Name>Whore Hat</Name>
+		<Descrip>Appeal +5. ...Whore Hat. Weight: 1. Collection: Hat.</Descrip>
+		<Stats>
+			<s6>5</s6>
+		</Stats>
+		<Weight>1</Weight>
+		<Collection>Hat</Collection>
 	</Item>
 </ItemList>

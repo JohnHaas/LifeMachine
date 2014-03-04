@@ -14,16 +14,29 @@ public class Item {
 	private String descrip;
 	private double[] stats;
 	private double[] statMult;
+	private double[] personality;
+	private double[] skills;
 	private double[] skillAff;
+	
+	private String colName;
+	private double weight;
+	private boolean canDrop;
 	
 	Item() {
 		name = "";
 		descrip = "";
 		id = globalId;
 		id++;
+		
 		stats = new double[Character.NUM_STATS];
 		statMult = new double[Character.NUM_STATS];
+		personality = new double[Character.NUM_PER];
+		skills = new double[Character.NUM_SKILL];
 		skillAff = new double[Character.NUM_SKILL];
+		
+		colName = "";
+		weight = 0;
+		canDrop = true;
 		itemList.add(this);
 	}
 	
@@ -97,6 +110,22 @@ public class Item {
 		statMult = val;
 	}
 	
+	public double[] getPersonality() {
+		return personality;
+	}
+	
+	public void setPersonality(double[] val) {
+		personality = val;
+	}
+	
+	public double[] getSkills() {
+		return skills;
+	}
+	
+	public void setSkills(double[] val) {
+		skills = val;
+	}
+	
 	public double[] getSkillAff() {
 		return skillAff;
 	}
@@ -119,6 +148,30 @@ public class Item {
 	
 	public void setDescrip(String val) {
 		descrip = val;
+	}
+	
+	public double getWeight() {
+		return weight;
+	}
+	
+	public void setWeight(double val) {
+		weight = val;
+	}
+	
+	public boolean getDrop() {
+		return canDrop;
+	}
+	
+	public void setDrop() {
+		canDrop = !canDrop;
+	}
+	
+	public String getColName() {
+		return colName;
+	}
+	
+	public void setColName(String val) {
+		colName = val;
 	}
 	
 	public int getId() {

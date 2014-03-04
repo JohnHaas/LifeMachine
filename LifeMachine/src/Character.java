@@ -12,6 +12,7 @@ public class Character {
 	
 	private static int globalId = 0;
 	private static ArrayList<Character> charList = new ArrayList<Character>();
+	private static int activeId = 2;
 
 	private int age;
 	private double decaytion;
@@ -27,6 +28,9 @@ public class Character {
 	private double[] skills;
 	private double[] skillAff;
 	private boolean[] traits;
+	
+	private double carryWeight;
+	private double currentWeight;
 	private ArrayList<Item> inventory;
 
 	private RelationTreeNode relations;
@@ -46,7 +50,12 @@ public class Character {
 		stats = new double[NUM_STATS];
 		statMult = new double[NUM_STATS];
 		personality = new double[NUM_PER];
+		skills = new double[NUM_SKILL];
+		skillAff = new double[NUM_SKILL];
 		traits = new boolean[NUM_TRAIT];
+		
+		carryWeight = 25;
+		currentWeight = 0;
 		inventory = new ArrayList<Item>();
 		
 		relations = new RelationTreeNode(this);
@@ -87,15 +96,33 @@ public class Character {
 	//Item usage
 	public void addItem(int i) {
 		inventory.add(Item.getItem(i));
+		currentWeight += Item.getItem(i).getWeight();
 	}
 	
-	public void removeItem(String name) {
+	public void addItem(Item i) {
+		inventory.add(i);
+		currentWeight += i.getWeight();
+	}
+	
+	public Item removeItem(String name) {
 		for(int i = 0; i < inventory.size(); i++) {
 			if(inventory.get(i).getName().equals(name)) {
-				inventory.remove(i);
-				break;
+				currentWeight -= inventory.get(i).getWeight();
+				return inventory.remove(i);
+				
 			}
 		}
+		return null;
+	}
+	
+	public Item removeItem(int id) {
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i).getId() == id) {
+				currentWeight -= inventory.get(i).getWeight();
+				return inventory.remove(i);
+			}
+		}
+		return null;
 	}
 
 	//Ages and changes decaytion
@@ -570,7 +597,7 @@ public class Character {
 	/*
 	 * SKILLS:
 	 * 0 = Hunting, 1 = Gathering, 2 = Tool Craft, 3 = Slash, 4 = Blunt, 5 = Pierce,
-	 * 6 = Block
+	 * 6 = Block, 7 = Throw
 	 */
 	public double getSkill(int i) {
 		return skills[i];
@@ -628,7 +655,38 @@ public class Character {
 		name = val;
 	}
 
+	public double getCarryWeight() {
+		return carryWeight * decaytion;
+	}
+	
+	public void setCarryWeight(double val) {
+		carryWeight = val;
+	}
+	
+	public double getCurrentWeight() {
+		return currentWeight;
+	}
+	
+	public void setCurrentWeight(double val) {
+		currentWeight = val;
+	}
+	
 	public int getId() {
 		return id;
+	}
+	
+	//Active Get Set
+	public void setActive() {
+		isActive = !isActive;
+	}
+	
+	public static Character getActiveChar() {
+		return charList.get(activeId);
+	}
+	
+	public static void setActiveChar(int id) {
+		getActiveChar().setActive();
+		activeId = id;
+		getActiveChar().setActive();
 	}
 }
