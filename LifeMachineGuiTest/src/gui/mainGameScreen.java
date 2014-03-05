@@ -12,63 +12,42 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class mainGameScreen extends BasicGameState {
 	
+	private boolean timeRunning = true;
+	
+	private String mouseLocation = "";
+	private boolean leftClick = false;
+	
 	private int screenWidth = Game.screenRes.x;
 	private int screenHeight = Game.screenRes.y;
 	
 	//Proportions for various windows in ratios of screen!
-	private float graphicsWindowWidthRatio = .75f;
-	private float graphicsWindowHeightRatio = .75f;
-	private float graphicsWindowStartX = 0;
-	private float graphicsWindowStartY = 0;
-	
-	private float newsBannerWindowWidthRatio = .75f;
-	private float newsBannerWindowHeightRatio = .04f;
-	private float newsBannerWindowStartX = 0;
-	private float newsBannerWindowStartY = 0;
-	
-	private float actionWindowWidthRatio = .25f;
-	private float actionWindowHeightRatio = 1;
-	private float actionWindowStartX = graphicsWindowWidthRatio;
-	private float actionWindowStartY = .0f;
-	
-	private float householdWindowWidthRatio = .50f;
-	private float householdWindowHeightRatio = .25f;
-	private float householdWindowStartX = 0;
-	private float householdWindowStartY = graphicsWindowHeightRatio;
-	
-	private float timeWindowWidthRatio = .25f;
-	private float timeWindowHeightRatio = .25f;
-	private float timeWindowStartX = householdWindowWidthRatio;
-	private float timeWindowStartY = graphicsWindowHeightRatio;
-	
-	private float actionsListWidthRatio = .23f;
-	private float actionsListHeightRatio = .8f; 
-	private float actionsListStartX = .76f;
-	private float actionsListStartY = .1f;
-	
-	private float shopButtonWidthRatio = .115f;
-	private float shopButtonHeightRatio = .08f;
-	private float shopButtonStartX = .755f;
-	private float shopButtonStartY = .91f;
-	
-	private float menuButtonWidthRatio = .115f;
-	private float menuButtonHeightRatio = .08f;
-	private float menuButtonStartX = .880f;
-	private float menuButtonStartY = .91f;
-	
-	private float characterButtonWidthRatio = .115f;
-	private float characterButtonHeightRatio = .08f;
-	private float characterButtonStartX = .755f;
-	private float characterButtonStartY = .01f;
-	
-	private float inventoryButtonWidthRatio = .115f;
-	private float inventoryButtonHeightRatio = .08f;
-	private float inventoryButtonStartX = .880f;
-	private float inventoryButtonStartY = .01f;
+	private Window graphics = new Window(0, 0, .75f, .75f );
+	private Window newsBanner = new Window(0, 0, .75f, .04f);
+	private Window actions = new Window(graphics.getWidthRatio(), 0, .25f, 1);
+	private Window households = new Window( 0, graphics.getHeightRatio(), .50f, .25f);
+	private Window time = new Window(households.getWidthRatio(), graphics.getHeightRatio(), .25f, .25f);
+	private Window actionsList = new Window( .76f, .1f, .23f, .8f);
+	private Window charactersSubwindow = new Window(.02f, .03f, .96f, .94f);
+
+	//these represent the hitboxes for the buttons, will be invisible later
+	private Button shop = new Button(.755f, .91f, .115f, .08f);
+	private Button menu = new Button(.880f, .91f, .115f, .08f);
+	private Button characters = new Button(.755f, .01f, .115f, .08f);
+	private Button inventory = new Button(.880f, .01f, .115f, .08f);
+
+	//color change upon hover for debug purposes
+	private Color shopButtonColor = Color.black;
+	private Color menuButtonColor = Color.black;
+	private Color charactersButtonColor = Color.black;
+	private Color inventoryButtonColor = Color.black;
 	
 	private String testNews = "Breaking News: This is a test news string!!";
 	private float newsScrollSpeed = .01f;
 	private float textpos = 0;
+	
+	
+	//Various subscreens due to button presses
+	private boolean charactersScreenOpen;
 	
 	
 	
@@ -94,35 +73,42 @@ public class mainGameScreen extends BasicGameState {
 		
 		
 		
-		drawScaledRect(g,graphicsWindowStartX, graphicsWindowStartY, graphicsWindowWidthRatio, graphicsWindowHeightRatio, Color.red);
+		drawScaledRect(g,graphics, Color.red);
 		
-		drawScaledRect(g,newsBannerWindowStartX, newsBannerWindowStartY, newsBannerWindowWidthRatio, newsBannerWindowHeightRatio, Color.cyan);
+		drawScaledRect(g,newsBanner, Color.cyan);
 		
+		
+		//News Banner
 		g.setColor(Color.black);
 		g.drawString(testNews, .75f * screenWidth + screenWidth - textpos , 10);
-		
 		g.drawString(testNews, .75f * screenWidth - textpos, screenHeight * .01f);
 
+		drawScaledRect(g,actions, Color.green);
 		
-		drawScaledRect(g,actionWindowStartX, actionWindowStartY, actionWindowWidthRatio, actionWindowHeightRatio, Color.green);
+		drawScaledRect(g,time, Color.blue);
 		
-		drawScaledRect(g,timeWindowStartX, timeWindowStartY, timeWindowWidthRatio, timeWindowHeightRatio, Color.blue);
+		drawScaledRect(g,households, Color.orange);
 		
-		drawScaledRect(g,householdWindowStartX, householdWindowStartY, householdWindowWidthRatio, householdWindowHeightRatio, Color.orange);
+		drawScaledRect(g,actionsList, Color.black);
 		
-		drawScaledRect(g,actionsListStartX, actionsListStartY, actionsListWidthRatio, actionsListHeightRatio, Color.black);
+		drawScaledRect(g,shop, shopButtonColor);
+		
+		drawScaledRect(g,menu, menuButtonColor);
+		
+		drawScaledRect(g,characters, charactersButtonColor);
+		
+		drawScaledRect(g,inventory, inventoryButtonColor);
+		
+		if(charactersScreenOpen)
+			drawCharacterScreen(g);
+		
+		
+		
 
-		drawScaledRect(g,shopButtonStartX, shopButtonStartY, shopButtonWidthRatio, shopButtonHeightRatio, Color.black);
-
-		drawScaledRect(g,menuButtonStartX, menuButtonStartY, menuButtonWidthRatio, menuButtonHeightRatio, Color.black);
-
-		drawScaledRect(g,characterButtonStartX, characterButtonStartY, characterButtonWidthRatio, characterButtonHeightRatio, Color.black);
-
-		drawScaledRect(g,inventoryButtonStartX, inventoryButtonStartY, inventoryButtonWidthRatio, inventoryButtonHeightRatio, Color.black);
 		
-	
-		
-		
+		g.setColor(Color.white);
+		g.drawString(mouseLocation, 100, 100);
+		g.drawString(shop.getActiveAreaStartX() + ", " + shop.getActiveAreaEndX(), 100, 200);
 
 		
 
@@ -131,16 +117,57 @@ public class mainGameScreen extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		
-		textpos += .25;
-		if(textpos == screenWidth * 2 + 10*testNews.length() )
-			textpos = 0;
+		
+		Input input = gc.getInput();
+		
+		
+		//This is what moves the text across the screen in the news area 
+		if(timeRunning)
+		updateNewsBanner();
+		
+		//changes color of hitboxes when mouse is in button region
+		updateMouseHoverAreas(input.getMouseX(), input.getMouseY());
+		
+		if(input.isMouseButtonDown(0))
+			leftClick = true;
+		
+		if (leftClick && !input.isMouseButtonDown(0)){
+		
+			executeButtonAction(input.getMouseX(), input.getMouseY());
+			leftClick = false;
+		}
+		
+		if(!timeRunning)
+			if(input.isKeyPressed(input.KEY_ESCAPE))
+			{
+				charactersScreenOpen = false;
+				timeRunning = true;
+				
+			}
+		
 
 	
 
+		
+		mouseLocation = "(" + input.getMouseX() + ", " + input.getMouseY() + ")";
+		
 	}
 
 	public int getID() {
 		return 3;
+	}
+	
+	private static void drawScaledRect(Graphics g, Window w, Color c){
+		g.setColor(c);
+		g.fillRect( w.getWindowStartX(), w.getWindowStartY(), w.getWindowWidth(), w.getWindowHeight());
+		
+	}
+	
+	private static void drawScaledRect(Graphics g, Window w){
+		
+		g.fillRect( w.getWindowStartX(), w.getWindowStartY(), w.getWindowWidth(), w.getWindowHeight());
+		
+		
 	}
 	
 	private static void drawScaledRect(Graphics g, float x, float y, float w, float h){
@@ -155,9 +182,73 @@ public class mainGameScreen extends BasicGameState {
 		g.setColor(c);
 		g.fillRect(x * Game.screenRes.x, y * Game.screenRes.y, Game.screenRes.x * w, Game.screenRes.y * h);
 
+	}
+	
+	private static void darkenBackground(Graphics g){
+		g.setColor(new Color(0,0,0, .75f));
+		g.fillRect(0,0,Game.screenRes.x, Game.screenRes.y);
+		
+	}
+	
+	private void updateMouseHoverAreas(float x, float y){
+		
+		
+		if(shop.getActiveAreaStartX() < x  && x < shop.getActiveAreaEndX()
+				&& shop.getActiveAreaStartY() < y && y < shop.getActiveAreaEndY() )
+			shopButtonColor = Color.blue;
+		else
+			shopButtonColor = Color.black;
+		
+		if(menu.getActiveAreaStartX() < x  && x < menu.getActiveAreaEndX()
+				&& shop.getActiveAreaStartY() < y && y < menu.getActiveAreaEndY() )
+			menuButtonColor = Color.blue;
+		else
+			menuButtonColor = Color.black;
+		
+		if(characters.getActiveAreaStartX() < x  && x < characters.getActiveAreaEndX()
+				&& characters.getActiveAreaStartY() < y && y < characters.getActiveAreaEndY() )
+			charactersButtonColor = Color.blue;
+		else
+			charactersButtonColor = Color.black;
+		
+		if(inventory.getActiveAreaStartX() < x  && x < inventory.getActiveAreaEndX()
+				&& inventory.getActiveAreaStartY() < y && y < inventory.getActiveAreaEndY() )
+			inventoryButtonColor = Color.blue;
+		else
+			inventoryButtonColor = Color.black;
+	}
+	
+	private void executeButtonAction(float x, float y){
+		
+		if(characters.getActiveAreaStartX() < x  && x < characters.getActiveAreaEndX()
+				&& characters.getActiveAreaStartY() < y && y < characters.getActiveAreaEndY()){
+			timeRunning = false;
+			charactersScreenOpen = true;
+			
+		}
+		
+		
 		
 		
 	}
+	
+	private void updateNewsBanner(){
+		
+		textpos += .25;
+		if(textpos == screenWidth * 2 + 10*testNews.length() )
+			textpos = 0;
+	}
+	
+	
+	private void drawCharacterScreen(Graphics g){
+		
+		
+		darkenBackground(g);
+		drawScaledRect(g, charactersSubwindow, Color.orange);
+		
+		
+	}
+	
 	
 	
 

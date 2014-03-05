@@ -13,7 +13,7 @@ public class Game extends StateBasedGame{
 	public static final int testscreen1 = 1;
 	public static final int testgamewindow = 2;
 	public static final int mainGameScreen = 3;
-	public static Point screenRes = new Point(1600,900);
+	public static final Point screenRes = new Point(1280,768);
 	
 	public Game(String gamename){
 		super(gamename);
