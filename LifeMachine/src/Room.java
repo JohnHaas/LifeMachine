@@ -6,20 +6,49 @@ import java.util.ArrayList;
  * Room has a set of characteristics, then filled based on those.
  */
 public class Room {
-	private ArrayList<Character> charList;
+	private ArrayList<Integer> charList;
+	private ArrayList<Item> items;
+	private double[] statChange;
+	private double[] atmosphere;
 	
 	Room() {
-		charList = new ArrayList<Character>();
+		charList = new ArrayList<Integer>();
+		items = new ArrayList<Item>();
+		statChange = new double[Character.NUM_STATS];
+		atmosphere = new double[0];
+	}
+	
+	//Character
+	public Character getCharacter(int i) {
+		return Character.getChar(charList.get(i));
 	}
 	
 	public void addCharacter(int i) {
-		charList.add(Character.getChar(i));
+		charList.add(i);
 	}
 	
 	public void removeCharacter(int id) {
 		for(int i = 0; i < charList.size(); i++) {
-			if(charList.get(i).getId() == id) {
+			if(charList.get(i) == id) {
 				charList.remove(charList.get(i));
+				break;
+			}
+		}
+	}
+
+	//Item
+	public Item getItems(int i) {
+		return items.get(i);
+	}
+
+	public void addItem(int i) {
+		items.add(Item.getItem(i));
+	}
+
+	public void removeItem(int id) {
+		for(int i = 0; i < items.size(); i++) {
+			if(items.get(i).getId() == id) {
+				items.remove(items.get(i));
 				break;
 			}
 		}

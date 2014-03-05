@@ -15,10 +15,13 @@ public class Character {
 	private static int activeId = 2;
 
 	private int age;
+	//0 = male; 1 = female
+	private int gender;
 	private double decaytion;
 	private boolean isActive;
 	private double upkeep;
 	private double income;
+	private String job;
 	private String name;
 	private int id;
 	
@@ -39,10 +42,12 @@ public class Character {
 	// Constructors
 	Character() {
 		age = 0;
+		gender = (int)(Math.random() * 2);
 		decaytion = .1;
 		isActive = false;
 		upkeep = 0;
 		income = 0;
+		job = "";
 		name = "";
 		id = globalId;
 		id++;
@@ -673,6 +678,22 @@ public class Character {
 	
 	public int getId() {
 		return id;
+	}
+	
+	public int getGender() {
+		return gender;
+	}
+	
+	public void setGender(int val) {
+		gender = val;
+	}
+	
+	public String getJob() {
+		return job;
+	}
+	
+	public void setJob(String val) {
+		job = val;
 	}
 	
 	//Active Get Set

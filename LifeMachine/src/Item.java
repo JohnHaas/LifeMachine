@@ -18,9 +18,12 @@ public class Item {
 	private double[] skills;
 	private double[] skillAff;
 	
+	private boolean usable;
 	private String colName;
 	private double weight;
 	private boolean canDrop;
+	private Effect effect;
+	private int effCap;
 	
 	Item() {
 		name = "";
@@ -34,10 +37,13 @@ public class Item {
 		skills = new double[Character.NUM_SKILL];
 		skillAff = new double[Character.NUM_SKILL];
 		
+		usable = false;
 		colName = "";
 		weight = 0;
 		canDrop = true;
 		itemList.add(this);
+		setEffect(new Effect());
+		setEffCap(0);
 	}
 	
 	Item(String name) {
@@ -174,7 +180,31 @@ public class Item {
 		colName = val;
 	}
 	
+	public boolean getUsable() {
+		return usable;
+	}
+	
+	public void setUsable(boolean val) {
+		usable = val;
+	}
+	
 	public int getId() {
 		return id;
+	}
+
+	public Effect getEffect() {
+		return effect;
+	}
+
+	public void setEffect(Effect effect) {
+		this.effect = effect;
+	}
+
+	public int getEffCap() {
+		return effCap;
+	}
+
+	public void setEffCap(int effCap) {
+		this.effCap = effCap;
 	}
 }

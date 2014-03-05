@@ -8,6 +8,7 @@ public class Household {
 	private ArrayList<Character> household;
 	private ArrayList<Item> itemList;
 	
+	private double[] statBoost;
 	private double income;
 	private double upkeep;
 	private double money;
@@ -15,6 +16,8 @@ public class Household {
 	Household() {
 		household = new ArrayList<Character>();
 		itemList = new ArrayList<Item>();
+		
+		setStatBoost(new double[Character.NUM_STATS]);
 		income = 0;
 		upkeep = 0;
 		money = 0;
@@ -87,6 +90,14 @@ public class Household {
 	
 	public double getMoney() {
 		return money;
+	}
+
+	public double[] getStatBoost() {
+		return statBoost;
+	}
+
+	public void setStatBoost(double[] statBoost) {
+		this.statBoost = statBoost;
 	}
 
 }
